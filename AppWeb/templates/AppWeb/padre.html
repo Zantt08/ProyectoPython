@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Título{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">NombredelSitio</div>
+            <button id="menu-toggle" class="menu-btn">☰</button>
+</nav>
+                    <div id="sidebar" class="sidebar">
+                        <a href="#">Opcion1</a>
+                        <a href="#">Opcion2</a>
+                        <a href="#">Opcion3</a>
+                    </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+
+        btn.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+        });
+
+        // Cierra el menú si hacés clic fuera
+        window.addEventListener('click', function(e) {
+            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+</script>
+</body>
+</html>
