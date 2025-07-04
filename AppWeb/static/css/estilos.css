@@ -5,32 +5,10 @@ body {
     padding: 0;
 }
 
-.navbar {
-    background-color: #202020;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    align-items: center;
-    position: relative;
-    z-index: 1001;
-}
-
 .logo {
     font-size: 20px;
     font-weight: bold;
     color: white;
-}
-
-/* Botón del menú lateral */
-.menu-btn {
-    font-size: 24px;
-    background-color: transparent;
-    color: white;
-    border: none;
-    cursor: pointer;
 }
 
 /* Sidebar lateral derecho */
