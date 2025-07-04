@@ -1,14 +1,32 @@
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    color: #333;
+}
+
+.navbar {
+  position: relative;     /* necesario para que z-index funcione */
+  z-index: 1100;          /* mayor que la sidebar */
 }
 
 .logo {
     font-size: 20px;
     font-weight: bold;
     color: white;
+}
+
+.logo a {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-weight: 400
+}
+
+.logo-img {
+    height: 40px !important;
+    width: 40px !important;
+    object-fit: contain !important;
+    display: block !important;
 }
 
 /* Sidebar lateral derecho */
@@ -40,4 +58,10 @@ body {
 
 .sidebar a:hover {
     background-color: #444;
+}
+
+.foto-con-marco {
+    border: 8px solid #212529; /* mismo color oscuro de la navbar */
+    box-sizing: border-box;    /* para que el borde no cambie tamaño */
+    
 }

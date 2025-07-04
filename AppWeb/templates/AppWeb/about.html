@@ -1,0 +1,19 @@
+{% extends 'AppWeb/padre.html' %}
+{% load static %}
+{% block title %}Acerca de Mí{% endblock %}
+
+{% block content %}
+<div class="container mt-5 d-flex flex-column align-items-center text-center">
+    <img src="{% static 'img/about.jpg' %}" alt="Foto Acerca de Mí" class="foto-con-marco mb-4" style="width: 250px; height: 300px; object-fit: cover;">
+    <h1 class="mb-4">Acerca de mí</h1>
+    <p class="lead px-3 px-md-5">
+        ¡Hola! Soy Santiago, tengo 19 años y soy el desarrollador de esta página como trabajo final.
+    </p>
+    <p class="lead px-3 px-md-5">
+        Este proyecto está hecho con Python, Django, HTML, CSS y Bootstrap.
+    </p>
+    <p class="lead px-3 px-md-5">
+        Me interesan los videojuegos, los idiomas y los viajes.
+    </p>
+</div>
+{% endblock %}

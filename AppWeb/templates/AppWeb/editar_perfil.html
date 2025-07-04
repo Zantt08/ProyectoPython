@@ -1,0 +1,35 @@
+{% extends "AppWeb/padre.html" %}
+{% load static %}
+{% block title %}Editar perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+    <h2 class="text-center w-100 mb-4">Editar Perfil</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                <h5>Datos de usuario</h5>
+                {{ perfil_form.as_p }}
+                <button type="submit" name="perfil_submit" class="btn btn-primary mt-3">Guardar cambios</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                <h5>Cambiar contraseña</h5>
+                {{ password_form.as_p }}
+                <button type="submit" name="password_submit" class="btn btn-warning mt-3">Cambiar contraseña</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
