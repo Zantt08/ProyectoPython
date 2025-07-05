@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from .models import Videojuego
 
 class RegistroUsuarioForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -42,3 +43,17 @@ class CustomPasswordChangeForm(PasswordChangeForm):
                 'autocomplete': 'off',
                 'placeholder': field.label,
             })
+
+class VideojuegoForm(forms.ModelForm):
+    class Meta:
+        model = Videojuego
+        fields = ['name', 'year', 'genre', 'developers', 'game_image']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'year': forms.NumberInput(attrs={'class': 'form-control'}),
+            'genre': forms.TextInput(attrs={'class': 'form-control'}),
+            'developers': forms.TextInput(attrs={'class': 'form-control'}),
+            'game_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
+

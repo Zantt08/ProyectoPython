@@ -1,0 +1,35 @@
+{% extends "AppWeb/padre.html" %}
+{% load static %}
+
+{% block title %}Lista de Videojuegos{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Videojuegos</h1>
+    {% if user.is_authenticated %}
+    <a href="{% url 'crear_videojuego' %}" class="btn btn-primary mb-3">Agregar nuevo videojuego</a>
+    {% endif %}
+    <div class="row">
+    {% for juego in juegos %}
+    <div class="col-6 col-sm-4 col-md-2 mb-4">
+        <div class="card">
+            {% if juego.game_image %}
+            <img src="{{ juego.game_image.url }}" alt="{{ juego.name }}" class="img-fixed">
+            {% endif %}
+            <div class="card-body p-2">
+                <h5 class="card-title mb-2"><strong>{{ juego.name }}</strong></h5>
+                <p class="card-text mb-1"><strong>Año:</strong> {{ juego.year }}</p>
+                <p class="card-text mb-1"><strong>Género:</strong><br>{{ juego.genre }}</p>
+                <p class="card-text"><strong>Desarrolladores:</strong><br>{{ juego.developers }}</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'editar_videojuego' juego.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                <a href="{% url 'borrar_videojuego' juego.pk %}" class="btn btn-sm btn-danger">Borrar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        {% empty %}
+        <p>No hay videojuegos cargados.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

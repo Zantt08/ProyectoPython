@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import RegistroUsuarioForm, EditarPerfilForm, CustomPasswordChangeForm
+from .forms import RegistroUsuarioForm, EditarPerfilForm, CustomPasswordChangeForm, VideojuegoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from .models import Videojuego
 
 # Create your views here.
 
@@ -72,5 +73,38 @@ def editar_perfil(request):
         'password_form': password_form,
     })
 
+def lista_videojuegos(request):
+    juegos = Videojuego.objects.all()
+    return render(request, 'AppWeb/lista_videojuegos.html', {'juegos': juegos})
 
+@login_required
+def crear_videojuego(request):
+    if request.method == 'POST':
+        form = VideojuegoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_videojuegos')
+    else:
+        form = VideojuegoForm()
+    return render(request, 'AppWeb/form_videojuego.html', {'form': form, 'accion': 'Crear'})
+
+@login_required
+def editar_videojuego(request, pk):
+    juego = get_object_or_404(Videojuego, pk=pk)
+    if request.method == 'POST':
+        form = VideojuegoForm(request.POST, request.FILES, instance=juego)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_videojuegos')
+    else:
+        form = VideojuegoForm(instance=juego)
+    return render(request, 'AppWeb/form_videojuego.html', {'form': form, 'accion': 'Editar'})
+
+@login_required
+def borrar_videojuego(request, pk):
+    juego = get_object_or_404(Videojuego, pk=pk)
+    if request.method == 'POST':
+        juego.delete()
+        return redirect('lista_videojuegos')
+    return render(request, 'AppWeb/confirma_borrado.html', {'objeto': juego})
 
